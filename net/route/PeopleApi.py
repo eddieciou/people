@@ -1,5 +1,6 @@
 from flask_restful_swagger_2 import Resource, swagger
 from datetime import datetime
+from net.route.SwaggerSchema import *
 
 class GetPelple(Resource):
     @swagger.doc({
@@ -8,20 +9,28 @@ class GetPelple(Resource):
         'responses' :{
             '200' : {
                 'description' : '顯示人員清單',
-                'schema' : {
-                    'type' : 'array',
-                    'items' : {
-                        'properties' : {
-                            'fname' : {
-                                'type' : 'string'
+                'schema' : PeopleList_RModel,
+                'examples' : {
+                    'application/json' : {
+                        'code' : 0,
+                        'msg' : '',
+                        'datas' : [
+                            {
+                                "fname": "Kent",
+                                "lname": "Brockman",
+                                "timestamp": "2018-11-05 23:35:43"
                             },
-                            'lname': {
-                                'type': 'string'
+                            {
+                                "fname": "Bunny",
+                                "lname": "Easter",
+                                "timestamp": "2018-11-05 23:35:43"
                             },
-                            'timestamp': {
-                                'type': 'string'
+                            {
+                                "fname": "Doug",
+                                "lname": "Farrell",
+                                "timestamp": "2018-11-05 23:35:43"
                             }
-                        }
+                        ]
                     }
                 }
             }
