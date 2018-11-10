@@ -1,6 +1,8 @@
+import logging
 from flask_restful_swagger_2 import Resource, swagger
 from datetime import datetime
 from net.route.SwaggerSchema import *
+
 
 class GetPelple(Resource):
     @swagger.doc({
@@ -37,6 +39,9 @@ class GetPelple(Resource):
         }
     })
     def get(self):
+        """ 取得人員清單"""
+        logging.getLogger('PeopleApi').info(self.__class__.__name__ + ' get')
+
         temestamp = datetime.now().strftime(("%Y-%m-%d %H:%M:%S"))
         PEOPLE = {
             "Farrell": {

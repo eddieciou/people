@@ -1,14 +1,23 @@
+import logging
 from flask import Flask,render_template
 from flask_restful_swagger_2 import Api
 from flask_cors import CORS
 from net.route.PeopleApi import *
+# Logger info need to put before anyothers
+from logging.config import fileConfig ;fileConfig('conf/logging.conf')
+logger = logging.getLogger()
+
+
 # Create the application instance
 app = Flask(__name__)
 CORS(app)
 api = Api(app, api_version='0.0', api_spec_url='/api/swagger')
 
 
-
+@app.before_request
+def before_request():
+    logger.info("before_request()")
+    return
 
 # Create a URL route in our application for "/"
 @app.route('/')
