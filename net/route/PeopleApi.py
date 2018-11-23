@@ -1,7 +1,7 @@
 import logging
 from flask_restful_swagger_2 import Resource, swagger
-from datetime import datetime
 from net.route.SwaggerSchema import *
+from commons.Common import Common
 
 
 class GetPelple(Resource):
@@ -42,23 +42,33 @@ class GetPelple(Resource):
         """ 取得人員清單"""
         logging.getLogger('PeopleApi').info(self.__class__.__name__ + ' get')
 
-        temestamp = datetime.now().strftime(("%Y-%m-%d %H:%M:%S"))
-        PEOPLE = {
-            "Farrell": {
+        PEOPLE = [
+            {
+              "Name": "Farrell",
+              "Inform": {
                 "fname": "Doug",
                 "lname": "Farrell",
-                "timestamp": temestamp
+                "timestamp": "232"
+              }
             },
-            "Brockman": {
+            {
+              "Name": "Brockman",
+              "Inform": {
                 "fname": "Kent",
                 "lname": "Brockman",
-                "timestamp": temestamp
+                "timestamp": "232"
+              }
             },
-            "Easter": {
-                "fname": "Bunny",
-                "lname": "Easter",
-                "timestamp": temestamp
+            {
+              "Name": "Easter",
+              "Inform": {
+                "fname": "Doug",
+                "lname": "Farrell",
+                "timestamp": "232"
+              }
             }
-        }
-        return [PEOPLE[key] for key in sorted(PEOPLE.keys())]
+          ]
+
+        # response code from ReturnCode and message
+        return Common.response(0, data=PEOPLE)
 
